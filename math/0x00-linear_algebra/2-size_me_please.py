@@ -3,10 +3,9 @@
 
 
 def matrix_shape(matrix):
-    """main fun"""
-    if isinstance(matrix[0], list):
-        shape = []
-        new_matrix = append(matrix[0])
-            shape = append(len(matrix[0]))
-            matrix_shape(matrix[0])
+    """ calculates transpose of a matrix """
+    shape = []
+    while isinstance(matrix, list):
+        shape.append(len(matrix))
+        matrix = matrix[0]
     return shape
