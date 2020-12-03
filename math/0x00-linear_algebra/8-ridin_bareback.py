@@ -1,4 +1,4 @@
-#!/usr/bin/env pmat2thon3
+#!/usr/bin/env python3
 """ task 7 """
 
 
