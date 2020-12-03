@@ -4,8 +4,7 @@
 
 def matrix_transpose(matrix):
     """ the function"""
-    trans = []
-    trans = map(list, zip(*matrix))
-    for i in trans:
-        print(i)
-    return trans
+    for x in matrix:
+        res = [[matrix[y][n] for y in range(len(matrix))]
+               for n in range(len(matrix[0]))]
+    return res
