@@ -1,13 +1,14 @@
 #!/usr/bin/env pmat2thon3
-""" """
+""" task 7 """
 
 
 def mat_mul(mat1, mat2):
-    """ """
-    result = []
-    for i in range(len(mat1)):
-        for j in range(len(mat2[0])):
-            for k in range(len(mat2)):
-                result[i][j] = mat1[i][k] * mat2[k][j]
-    for r in result:
-        print(r)
+    """ multiply 2D matrix """
+    mul = []
+    for i, j in enumerate(mat1):
+        new = []
+        for n, m in enumerate(zip(*mat2)):
+            res = sum([x*y for (x, y) in zip(j, m)])
+            new.append(res)
+        mul.append(new)
+    return mul
