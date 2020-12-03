@@ -7,7 +7,6 @@ def add_matrices2D(mat1, mat2):
     sum_l = []
     if len(mat1) != len(mat2) or len(mat1[0]) != len(mat2[0]):
         return None
-    for i in range(len(mat1)):
-        for x, y in zip(mat1[i], mat2[i]):
-            sum_l.append(x + y)
+    sum_l = [[mat1[x][y] + mat2[x][y] for y in range(len(mat1[0]))]
+             for x in range(len(mat1))]
     return sum_l
