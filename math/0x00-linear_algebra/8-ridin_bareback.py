@@ -4,6 +4,8 @@
 
 def mat_mul(mat1, mat2):
     """ multiply 2D matrix """
+    if len(mat1[0]) != len(mat2):
+        return None
     mul = []
     for i, j in enumerate(mat1):
         new = []
