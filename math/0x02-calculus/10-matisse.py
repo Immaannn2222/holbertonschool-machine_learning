@@ -9,4 +9,3 @@ def poly_derivative(poly):
     if len(poly) <= 1:
         return [0]
     return [i * j for i, j in enumerate(poly[1:], 1)]
-
