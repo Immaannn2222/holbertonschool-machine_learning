@@ -13,8 +13,9 @@ def poly_integral(poly, C=0):
         return None
     for i in range(len(poly)):
         x = poly[i] % (i + 1)
-        if (x == 0):
-            intg_list.append(poly[i] // (i+1))
+        y = poly[i] / (i+1)
+        if (x != 0 and y != 0):
+            intg_list.append(y)
         else:
-            intg_list.append(poly[i] / (i+1))
+            intg_list.append(int(y))
     return intg_list
