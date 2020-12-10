@@ -8,6 +8,5 @@ def poly_derivative(poly):
         return None
     if len(poly) <= 1:
         return [0]
-    if not isinstance(poly, list):
-        return [i * j for i, j in enumerate(poly[1:], 1)]
-    return None
+    return [i * j for i, j in enumerate(poly[1:], 1)]
+
