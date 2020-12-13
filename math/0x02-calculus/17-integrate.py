@@ -11,6 +11,8 @@ def poly_integral(poly, C=0):
     if not isinstance(poly, list) or not all(isinstance(
                         x, (int, float)) for x in poly) or poly == []:
         return None
+    if len(poly) == 1 and poly[0] == 0:
+        return intg_list
     for i in range(len(poly)):
         x = poly[i] % (i + 1)
         y = poly[i] / (i+1)
