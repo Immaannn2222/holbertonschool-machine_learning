@@ -19,12 +19,12 @@ class Poisson:
             self.lambtha = (sum(data) / len(data))
 
     def pmf(self, k):
+        """ Calculates the value of the PMF of “successes”"""
         e = 2.7182818285
         fact = 1
-        """ Calculates the value of the PMF of “successes”"""
         if k is not int:
             int(k)
         if k > 0:
             for i in range(1, k + 1):
                 fact *= i
-        return((e **(-self.lambtha) * self.lambtha ** k) / fact)
+        return((e ** (-self.lambtha) * self.lambtha ** k) / fact)
