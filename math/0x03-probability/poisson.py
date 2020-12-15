@@ -22,7 +22,7 @@ class Poisson:
         """ Calculates the value of the PMF of “successes”"""
         e = 2.7182818285
         fact = 1
-        if k is not int:
+        if isinstance(k, int) is False:
             int(k)
         for i in range(2, k + 1):
             fact *= i
