@@ -31,3 +31,25 @@ class Normal:
     def x_value(self, z):
         """ Calculates the x-value of a given z-score """
         return(self.mean + z * self.stddev)
+
+    def err_f(self, x):
+        """ clacultes the error in a function """
+        π = 3.1415926536
+        deno = 2 / π ** 0.5
+        up = x - x ** 3 / 3 + x ** 5 / 10 - x ** 7 / 42 + x ** 9 / 216
+        return(up / deno)
+
+    def pdf(self, x):
+        """ Calculates the value of the PDF for a given x-value """
+        π = 3.1415926536
+        e = 2.7182818285
+        i = e ** (- (1 / 2) * (((x - self.mean) / self.stddev) ** 2))
+        j = (self.stddev * ((2 * π) ** (1/2)))
+        return(i / j)
+
+    def cdf(self, x):
+        """ Calculates the value of the CDF for a given x-value """
+        π = 3.1415926536
+        e = 2.7182818285
+        y = (x - self.mean) / (self.stddev * (2 ** 0.5))
+        return(0.5 * (1 + self.err_f(y)))
