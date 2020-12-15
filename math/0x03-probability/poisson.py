@@ -23,9 +23,20 @@ class Poisson:
         e = 2.7182818285
         fact = 1
         if isinstance(k, int) is False:
-            int(k)
+            k = int(k)
         if k < 0:
             return 0
         for i in range(2, k + 1):
             fact *= i
         return((e ** (-self.lambtha) * self.lambtha ** k) / fact)
+
+    def cdf(self, k):
+        pmff = 0
+        """ Calculates the value of the CDF of “successes” """
+        if isinstance(k, int) is False:
+            k = int(k)
+        if k < 0:
+            return 0
+        for i in range(k):
+            pmff += self.pmf(i)
+            return (pmff)
