@@ -24,7 +24,6 @@ class Poisson:
         fact = 1
         if k is not int:
             int(k)
-        if k > 0:
-            for i in range(1, k + 1):
-                fact *= i
+        for i in range(2, k + 1):
+            fact *= i
         return((e ** (-self.lambtha) * self.lambtha ** k) / fact)
