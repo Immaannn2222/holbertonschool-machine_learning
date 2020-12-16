@@ -8,11 +8,11 @@ class Binomial:
         """ class constructor """
         self.data = data
         if data is None:
-            if n < 0:
+            if n <= 0:
                 raise ValueError("n must be a positive value")
             else:
                 self.n = int(n)
-            if (p <= 0) is True or (p >= 1) is True:
+            if (p <= 0) or (p >= 1):
                 raise ValueError("p must be greater than 0 and less than 1")
             else:
                 self.p = float(p)
