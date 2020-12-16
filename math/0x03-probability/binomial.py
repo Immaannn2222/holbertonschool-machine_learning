@@ -7,13 +7,15 @@ class Binomial:
     def __init__(self, data=None, n=1, p=0.5):
         """ class constructor """
         self.data = data
-        self.n = int(n)
-        self.p = float(p)
         if data is None:
             if n < 0:
                 raise ValueError("n must be a positive value")
-            if (p < 0) is True or (p > 1) is True:
+            else:
+                self.n = int(n)
+            if (p <= 0) is True or (p >= 1) is True:
                 raise ValueError("p must be greater than 0 and less than 1")
+            else:
+                self.p = float(p)
         else:
             if isinstance(data, list) is False:
                 raise TypeError("data must be a list")
