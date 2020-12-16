@@ -35,9 +35,9 @@ class Normal:
     def err_f(self, x):
         """ clacultes the error in a function """
         π = 3.1415926536
-        deno = 2 / π ** 0.5
-        up = x - x ** 3 / 3 + x ** 5 / 10 - x ** 7 / 42 + x ** 9 / 216
-        return(up / deno)
+        deno = 2 / (π ** 0.5)
+        up = x - (x ** 3) / 3 + (x ** 5) / 10 - (x ** 7) / 42 + (x ** 9) / 216
+        return(up * deno)
 
     def pdf(self, x):
         """ Calculates the value of the PDF for a given x-value """
