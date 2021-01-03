@@ -5,6 +5,7 @@ import numpy as np
 
 class Neuron:
     """ the neuron class"""
+
     def __init__(self, nx):
         """ class constructor """
         if type(nx) is not int:
