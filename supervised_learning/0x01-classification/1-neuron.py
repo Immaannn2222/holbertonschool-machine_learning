@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" second class """
+""" first class """
 import numpy as np
 
 
