@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+
 """ first class """
 import numpy as np
 
@@ -8,7 +10,7 @@ class Neuron:
 
     def __init__(self, nx):
         """class constructor"""
-        if  not isinstance(nx, int):
+        if not isinstance(nx, int):
             raise TypeError("nx must be a integer")
         if nx < 1:
             raise ValueError("nx must be positive")
