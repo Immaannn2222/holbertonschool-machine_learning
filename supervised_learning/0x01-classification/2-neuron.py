@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-""" third class """
+"""first class"""
 import numpy as np
 
 
 class Neuron:
-    """ the neuron class"""
+    """the neuron class"""
+
     def __init__(self, nx):
         """ class constructor """
         if type(nx) is not int:
