@@ -14,15 +14,15 @@ class Neuron:
         self.__W = np.random.randn(1, nx)
         self.__b = 0
         self.__A = 0
-        
+
     @property
     def W(self):
         return self.__W
-        
+
     @property
     def b(self):
         return self.__b
-        
+
     @property
     def A(self):
         return self.__A
@@ -38,7 +38,7 @@ class Neuron:
         """ Calculates the cost of the model using logistic regression"""
         i = np.shape(Y)[1]
         print(i)
-        err_sum = 0.0 
+        err_sum = 0.0
         err_sum = np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
         err_cost = -(1 / i) * err_sum
         return err_cost
@@ -46,5 +46,5 @@ class Neuron:
     def evaluate(self, X, Y):
         """Evaluates the neuron’s predictions"""
         self.forward_prop(X)
-        pred = np.where(self.A >= 0.5, 1, 0)
-        return pred, self.cost(Y, self.A)
+        pred = np.where(self.__A >= 0.5, 1, 0)
+        return pred, self.cost(Y, self.__A)
