@@ -4,14 +4,14 @@ import numpy as np
 
 
 class Neuron:
-    """the neuron class"""
+    """ the neuron class"""
     def __init__(self, nx):
-        """class constructor"""
+        """class instructor"""
         self.nx = nx
-        if not isinstance(nx, int):
-            raise TypeError("nx must be a integer")
+        if type(nx) is not int:
+            raise TypeError("nx must be an integer")
         if nx < 1:
-            raise ValueError("nx must be positive")
+            raise ValueError("nx must be a positive integer")
         self.__W = np.random.randn(1, nx)
         self.__b = 0
         self.__A = 0
