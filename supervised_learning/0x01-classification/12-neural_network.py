@@ -55,3 +55,17 @@ class NeuralNetwork:
         x2 = np.matmul(self.__W2, self.__A1) + self.__b2
         self.__A2 = 1/(1 + (np.exp(-x2)))
         return self.__A1, self.__A2
+
+    def cost(self, Y, A):
+        """calculates cost"""
+        i = np.shape(Y)[1]
+        err_sum = 0.0
+        err_sum = np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        err_cost = -(1 / i) * err_sum
+        return err_cost
+
+    def evaluate(self, X, Y):
+        """evaluates"""
+        self.forward_prop(X)
+        pred = np.where(self.__A2 >= 0.5, 1, 0)
+        return pred, self.cost(Y, self.__A2)

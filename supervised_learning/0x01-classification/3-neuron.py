@@ -17,17 +17,14 @@ class Neuron:
 
     @property
     def W(self):
-        "getter for weights"
         return self.__W
 
     @property
     def b(self):
-        """bias getter"""
         return self.__b
 
     @property
     def A(self):
-        """activated output getter"""
         return self.__A
 
     def forward_prop(self, X):
