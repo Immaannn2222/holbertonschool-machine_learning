@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
-
-
 """ first class """
 import numpy as np
 
 
 class Neuron:
     """the neuron class"""
-
     def __init__(self, nx):
         """class constructor"""
+        self.nx = nx
         if not isinstance(nx, int):
             raise TypeError("nx must be a integer")
         if nx < 1:
