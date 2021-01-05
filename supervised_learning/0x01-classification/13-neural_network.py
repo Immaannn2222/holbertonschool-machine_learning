@@ -75,8 +75,8 @@ class NeuralNetwork:
         DZ2 = A2 - Y
         deriv_sigmoid = A1 * (1 - A1)
         m = Y.shape[1]
+        DZ1 = np.matmul(self.W2.T, DZ2) * deriv_sigmoid
         self.__W2 = self.__W2 - alpha * np.matmul(DZ2, A1.T) / m
         self.__b2 = self.__b2 - alpha * np.sum(DZ2, axis=1, keepdims=True) / m
-        DZ1 = np.matmul(self.W2.T, DZ2) * deriv_sigmoid
         self.__W1 = self.__W1 - alpha * np.matmul(DZ1, X.T) / m
         self.__b1 = self.__b1 - alpha * np.sum(DZ1, axis=1, keepdims=True) / m
