@@ -5,6 +5,7 @@ import numpy as np
 
 class DeepNeuralNetwork:
     """ the neuron class"""
+
     def __init__(self, nx, layers):
         """class instructor"""
         self.nx = nx
@@ -17,9 +18,15 @@ class DeepNeuralNetwork:
             raise TypeError("layers must be a list of positive integers")
         if not (all(layers) >= 0):
             raise TypeError("layers must be a list of positive integers")
-        self.L = len(layers) - 1
+        self.L = len(layers)
         self.cache = {}
         self.weights = {}
-        for l in range(0, self.L + 1):
-            self.weights['W' + str(l)] = np.random.randn(layers[l], layers[l-1]) * np.sqrt(2/layers[l-1])
-            self.weights['b' + str(l)] = np.zeros((layers[l], 1))
+        for l in range(self.L):
+            if l == 0:
+                self.weights['W' + str(l + 1)
+                             ] = np.random.randn(layers[l], nx) * np.sqrt(2/nx)
+                self.weights['b' + str(l + 1)] = np.zeros((layers[l], 1))
+            else:
+                self.weights['W' + str(l + 1)] = np.random.randn(layers[l],
+                                                                 layers[l - 1]) * np.sqrt(2/layers[l - 1])
+                self.weights['b' + str(l + 1)] = np.zeros((layers[l], 1))
