@@ -23,9 +23,9 @@ class DeepNeuralNetwork:
         self.weights = {}
         for k in range(self.L):
             if k == 0:
-                self.weights['W' + str(k + 1)
-                             ] = np.random.randn(layers[k], nx) * np.sqrt(2/nx)
-                self.weights['b' + str(k + 1)] = np.zeros((layers[k], 1))
+                self.weights['W' + str(k)
+                             ] = np.random.randn(layers[0], nx) * np.sqrt(2/nx)
+                self.weights['b' + str(k)] = np.zeros((layers[0], 1))
             else:
                 f = np.random.randn(layers[k], layers[k - 1]
                                     ) * np.sqrt(2/layers[k - 1])
