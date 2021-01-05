@@ -26,32 +26,26 @@ class NeuralNetwork:
 
     @property
     def W1(self):
-        "getter for weights"
         return self.__W1
 
     @property
     def b1(self):
-        """bias getter"""
         return self.__b1
 
     @property
     def A1(self):
-        """activated output getter"""
         return self.__A1
 
     @property
     def W2(self):
-        "getter for weights"
         return self.__W2
 
     @property
     def b2(self):
-        """bias getter"""
         return self.__b2
 
     @property
     def A2(self):
-        """activated output getter"""
         return self.__A2
 
     def forward_prop(self, X):
@@ -78,11 +72,11 @@ class NeuralNetwork:
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """Calculates one pass of gradient descent on the neural network"""
-        i = Y.shape[1]
         DZ2 = A2 - Y
         deriv_sigmoid = A1 * (1 - A1)
-        self.__W2 = self.__W2 - alpha * np.matmul(DZ2, A1.T) / i
-        self.__b2 = self.__b2 - alpha * np.sum(DZ2, axis=1, keepdims=True) / i
+        m = Y.shape[1]
+        self.__W2 = self.__W2 - alpha * np.matmul(DZ2, A1.T) / m
+        self.__b2 = self.__b2 - alpha * np.sum(DZ2, axis=1, keepdims=True) / m
         DZ1 = np.matmul(self.W2.T, DZ2) * deriv_sigmoid
-        self.__W1 = self.__W1 - alpha * np.matmul(DZ1, X.T) / i
-        self.__b1 = self.__b1 - alpha * np.sum(DZ1, axis=1, keepdims=True) / i
+        self.__W1 = self.__W1 - alpha * np.matmul(DZ1, X.T) / m
+        self.__b1 = self.__b1 - alpha * np.sum(DZ1, axis=1, keepdims=True) / m
