@@ -23,12 +23,12 @@ class DeepNeuralNetwork:
         self.__weights = {}
         for k in range(self.__L):
             if k == 0:
-                self.__weights['W' + str(k + 1)
-                             ] = np.random.randn(layers[0], nx) * np.sqrt(2/nx)
+                self.__weights['W' + str(k + 1)] = np.random.randn(
+                    layers[0], nx) * np.sqrt(2/nx)
                 self.__weights['b' + str(k + 1)] = np.zeros((layers[0], 1))
             else:
-                f = np.random.randn(layers[k], layers[k - 1]
-                                    ) * np.sqrt(2/layers[k - 1])
+                f = np.random.randn(layers[k], layers[k - 1]) * np.sqrt(
+                    2/layers[k - 1])
                 self.__weights['W' + str(k + 1)] = f
                 self.__weights['b' + str(k + 1)] = np.zeros((layers[k], 1))
 
