@@ -2,6 +2,7 @@
 """ Tensorflow project """
 import tensorflow as tf
 
+
 def create_placeholders(nx, classes):
     """  returns two placeholders """
     x = tf.placeholder(tf.float32, name="x")

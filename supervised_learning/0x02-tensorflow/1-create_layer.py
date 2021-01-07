@@ -9,5 +9,5 @@ def create_layer(prev, n, activation):
     layer = tf.layers.Dense(
             units=n,
             kernel_initializer=init,
-            activation=activation, name="layer",)
+            activation=activation, name="layer")
     return layer(prev)
