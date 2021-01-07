@@ -86,7 +86,7 @@ class DeepNeuralNetwork:
                 "b" + str(k)] - alpha * db
 
     def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
-             graph=True, step=100):
+              graph=True, step=100):
         """Trains the deep neural network by updating the private attributes"""
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
