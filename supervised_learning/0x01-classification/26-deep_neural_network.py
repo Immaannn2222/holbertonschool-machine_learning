@@ -48,94 +48,101 @@ class DeepNeuralNetwork:
         return self.__weights
 
     def forward_prop(self, X):
-        """ Calculates the forward propagation of the neural network """
-        self.cache["A0"] = X
-        for k in range(self.__L):
-            d = np.matmul(self.__weights["W" + str(k + 1)], self.cache[
-                "A" + str(k)]) + (self.__weights["b" + str(k + 1)])
-            r = self.cache["A" + str(k + 1)] = 1/(1 + (np.exp(-d)))
-        return r, self.cache
+        """Calculates the forward propagation of the neural network"""
+        self.__cache["A0"] = X
+        for i in range(self.__L):
+            w = self.__weights["W"+str(i+1)]
+            b = self.__weights["b" + str(i+1)]
+            z = np.matmul(w, self.__cache["A"+str(i)]) + b
+            Sigmoid_a = 1 / (1 + np.exp(-z))
+            self.__cache["A"+str(i+1)] = Sigmoid_a
+
+        return self.__cache["A"+str(self.__L)], self.__cache
 
     def cost(self, Y, A):
-        """Calculates the cost of the model using logistic regression"""
-        i = np.shape(Y)[1]
-        err_sum = 0.0
-        err_sum = np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
-        err_cost = -(1 / i) * err_sum
-        return err_cost
+        """cost of the model using logistic regression"""
+        nx, m = Y.shape
+        loss = - (Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        sumloss = np.sum(loss)
+        cost = (1 / m) * sumloss
+        return cost
 
     def evaluate(self, X, Y):
-        """evaluates"""
-        self.forward_prop(X)
-        pred = np.where(self.cache["A" + str(self.__L)] >= 0.5, 1, 0)
-        return pred, self.cost(Y, self.cache["A" + str(self.__L)])
+        """ evaluate The activated output"""
+        Sigmoid_a, cache = self.forward_prop(X)
+        pred_evalute = np.where(Sigmoid_a < 0.5, 0, 1)
+        cost = self.cost(Y, Sigmoid_a)
+        return pred_evalute, cost
 
     def gradient_descent(self, Y, cache, alpha=0.05):
-        """Calculates one pass of gradient descent on the neural network"""
-        m = Y.shape[1]
-        dz = self.cache["A" + str(self.L)] - Y
-        for k in range(self.L, 0, -1):
-            prev_lay = self.cache["A" + str(k - 1)]
-            dW = np.matmul(dz, prev_lay.T) / m
-            db = np.sum(dz, axis=1, keepdims=True) / m
-            deriv_sig = prev_lay * (1 - prev_lay)
-            dz = np.matmul(self.weights["W" + str(k)].T, dz) * deriv_sig
-            self.__weights["W" + str(k)] = self.__weights[
-                "W" + str(k)] - alpha * dW
-            self.__weights["b" + str(k)] = self.__weights[
-                "b" + str(k)] - alpha * db
+        """gradient_descent
+        backpropagation
+        """
+        weights = self.__weights.copy()
+        nx, m = Y.shape
+        dz = cache["A"+str(self.__L)] - Y
+        for i in range(self.__L, 0, -1):
+            A_i = "A"+str(i-1)
+            wi = "W"+str(i)
+            bi = "b"+str(i)
+            dw = (1/m) * np.matmul(dz, self.__cache["A"+str(i-1)].T)
+            db = (1/m) * np.sum(dz, axis=1, keepdims=True)
+            self.__weights[wi] = self.__weights[wi] - (dw * alpha)
+            self.__weights[bi] = self.__weights[bi] - (db * alpha)
+            dz = np.matmul(weights[wi].T, dz
+                           ) * (cache[A_i] * (1 - cache[A_i]))
+        return self.__weights
 
-    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
-        """Trains the deep neural network by updating the private attributes"""
+    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
+              graph=True, step=100):
+        """the evaluation of the training data"""
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
-        if iterations < 0:
+        elif iterations <= 0:
             raise ValueError("iterations must be a positive integer")
-        if not isinstance(alpha, float):
+        elif not isinstance(alpha, float):
             raise TypeError("alpha must be a float")
-        if alpha < 0:
+        if alpha <= 0:
             raise ValueError("alpha must be positive")
         if verbose or graph:
-            if not isinstance(step, int):
-                raise TypeError('step must be an integer')
-            if step not in range(0, iterations + 1):
-                raise ValueError('step must be positive and <= iterations')
-        i = []
-        c = []
-        for iteration in range(iterations + 1):
-            self.forward_prop(X)
-            self.gradient_descent(Y, self.cache, alpha)
-            if verbose and iteration % step == 0:
-                c.append(self.cost(Y, self.__cache["A" + str(self.L)]))
-                i.append(iteration)
-                ind_cost = self.cost(Y, self.__cache["A" + str(self.L)])
-                i.append(iteration)
-                c.append(ind_cost)
-                print("Cost after {} iterations: {}".format(
-                    iteration, ind_cost))
-        if graph:
-            plt.plot(i, c)
-            plt.xlabel('iteration')
-            plt.ylabel('cost')
+            if type(step) is not int:
+                raise TypeError("step must be an integer")
+            if step < 0 or step > iterations:
+                raise ValueError("step must be positive and <= iterations")
+        xValue = []
+        yValue = []
+        for i in range(iterations):
+            A, cache = self.forward_prop(X)
+            self.gradient_descent(Y, cache, alpha)
+            cost = self.cost(Y, A)
+            if verbose:
+                if (i < 1 or i % step == 0):
+                    print("Cost after {} iterations: {}".format(i, cost))
+                    xValue.append(i+step)
+                    yValue.append(cost)
+        if graph is True:
             plt.title('Training Cost')
+            plt.ylabel('cost')
+            plt.xlabel('iteration')
+            plt.plot(xValue, yValue)
             plt.show()
         return self.evaluate(X, Y)
 
     def save(self, filename):
-        """Saves the instance object to a file in pickle format"""
+        """ save file"""
         if not filename:
             return None
-        if not filename.endswith(".pkl"):
-            filename += ".pkl"
-        with open(filename, "wb") as f:
-            pickle.dump(self, f)
+        if not(filename.endswith(".pkl")):
+            filename = filename + ".pkl"
+        with open(filename, 'wb') as fileObject:
+            return pickle.dump(self, fileObject)
 
     @staticmethod
     def load(filename):
-        """loads pickled instance object"""
+        """ load file"""
         try:
-            with open(filename, "rb") as f:
-                s = pickle.load(f)
-            return s
-        except FileExistsError:
+            with open(filename, 'rb') as fileObject:
+                res = pickle.load(fileObject)
+            return res
+        except FileNotFoundError:
             return None
