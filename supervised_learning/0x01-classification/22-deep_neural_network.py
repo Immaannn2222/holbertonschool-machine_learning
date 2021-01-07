@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ third class """
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 class DeepNeuralNetwork:
