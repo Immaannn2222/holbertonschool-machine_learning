@@ -47,7 +47,7 @@ def train(
                 x: X_valid,
                 y: Y_valid
             })
-            if i % 100 == 0:
+            if i % 100 == 0 or i == 0 or i == iterations:
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(cost_train))
                 print("\tTraining Accuracy: {}".format(ac_train))
