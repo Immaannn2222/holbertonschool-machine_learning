@@ -43,6 +43,7 @@ def train_mini_batch(
             print("\tValidation Cost: {}".format(loss_valid))
             print("\tValidation Accuracy: {}".format(
                 accuracy_valid))
+        if i < epochs:
             for j in range(nb_batches + 1):
                 sess.run(train_op, feed_dict={
                     x: X_train[j * batch_size:(j + 1) * batch_size],
