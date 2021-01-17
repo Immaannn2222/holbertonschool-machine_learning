@@ -14,6 +14,7 @@ def train_mini_batch(
         load_path="/tmp/model.ckpt",
         save_path="/tmp/model.ckpt"):
     """trains using mini-batch gradient descent"""
+    nb_batches = int(X_train.shape[0] / batch_size)
     with tf.Session() as sess:
         saver = tf.train.import_meta_graph(load_path + '.meta')
         saver.restore(sess, load_path)
@@ -42,7 +43,6 @@ def train_mini_batch(
             print("\tValidation Cost: {}".format(loss_valid))
             print("\tValidation Accuracy: {}".format(
                 accuracy_valid))
-            nb_batches = int(X_train.shape[0] / batch_size)
             for j in range(nb_batches + 1):
                 sess.run(train_op, feed_dict={
                     x: X_train[j * batch_size:(j + 1) * batch_size],
