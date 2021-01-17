@@ -42,4 +42,17 @@ def train_mini_batch(
             print("\tValidation Cost: {}".format(loss_valid))
             print("\tValidation Accuracy: {}".format(
                 accuracy_valid))
-            return saver.save(sess, save_path)
+            nb_batches = int(X_train.shape[0] / batch_size)
+            for j in range(nb_batches + 1):
+                sess.run(train_op, feed_dict={
+                    x: X_train[j * batch_size:(j + 1) * batch_size],
+                    y: Y_train[j * batch_size:(j + 1) * batch_size]})
+                if(j > 0) and (j % 100 == 0) and (j < nb_batches):
+                    accuracy_step, loss_step = sess.run((accuracy, loss),
+                                                          feed_dict={
+                        x: X_train[j * batch_size:(j + 1) * batch_size],
+                        y: Y_train[j * batch_size:(j + 1) * batch_size]})
+                    print("\tStep: {}".format(j))
+                    print("\t\tCost: {}".format(loss_step))
+                    print("\t\tAccuracy:  {}".format(accuracy_step))
+        return saver.save(sess, save_path)
