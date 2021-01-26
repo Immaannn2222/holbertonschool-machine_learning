@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Keras"""
-from tensorflow import keras as K
+import tensorflow.keras as K
 
 
 def train_model(
@@ -16,7 +16,7 @@ def train_model(
         data,
         labels,
         batch_size=batch_size,
-        nb_epoch=epochs,
+        epochs=epochs,
         verbose=verbose,
         shuffle=shuffle)
     return history
