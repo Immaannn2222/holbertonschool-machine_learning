@@ -16,7 +16,7 @@ def train_model(
         data,
         labels,
         shuffle=shuffle,
-        epochs=epochs,
+        nb_epoch=epochs,
         verbose=verbose,
         batch_size=batch_size)
     return history
