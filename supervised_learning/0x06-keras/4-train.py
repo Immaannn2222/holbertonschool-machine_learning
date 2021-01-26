@@ -19,4 +19,4 @@ def train_model(
         nb_epoch=epochs,
         verbose=verbose,
         batch_size=batch_size)
-    return history
+    return History
