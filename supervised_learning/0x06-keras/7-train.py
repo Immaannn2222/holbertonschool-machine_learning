@@ -19,15 +19,16 @@ def train_model(
         shuffle=False):
     """also train the model with learning rate decay"""
     callback_list = []
-    if learning_rate_decay:
-        def scheduler(step):
-            return alpha / (1 + decay_rate * step)
-        l_dec = K.callbacks.LearningRateScheduler(
-            scheduler, verbose=1)
-        callback_list.append(l_dec)
-    if early_stopping:
-        ea_st = K.callbacks.EarlyStopping(patience=patience)
-        callback_list.append(ea_st)
+    if validation_data:
+        if learning_rate_decay:
+            def scheduler(step):
+                return alpha / (1 + decay_rate * step)
+            l_dec = K.callbacks.LearningRateScheduler(
+                scheduler, verbose=1)
+            callback_list.append(l_dec)
+        if early_stopping:
+            ea_st = K.callbacks.EarlyStopping(patience=patience)
+            callback_list.append(ea_st)
         history = network.fit(
             x=data,
             y=labels,
