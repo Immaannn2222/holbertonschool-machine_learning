@@ -16,9 +16,7 @@ def train_model(
     history = network.fit(
         x=data,
         y=labels,
-        validation_data=(
-            data,
-            labels),
+        validation_data=validation_data,
         shuffle=shuffle,
         nb_epoch=epochs,
         verbose=verbose,

@@ -18,12 +18,12 @@ def train_model(
     if validation_data:
         ea_st = K.callbacks.EarlyStopping(
             monitor='val_loss', patience=patience)
+    else:
+        ea_st = None
     history = network.fit(
         x=data,
         y=labels,
-        validation_data=(
-            data,
-            labels),
+        validation_data=validation_data,
         shuffle=shuffle,
         nb_epoch=epochs,
         verbose=verbose,
