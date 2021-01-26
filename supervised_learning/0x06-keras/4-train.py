@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Keras"""
-import tensorflow.keras as K
+from tensorflow import keras as K
 
 
 def train_model(
