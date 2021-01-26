@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-from tensorflow import keras as K
+"""Keras"""
+import tensorflow.keras as K
 
 
 def train_model(
@@ -17,6 +18,18 @@ def train_model(
         verbose=True,
         shuffle=False):
     """also train the model with learning rate decay"""
+    if validation_data:
+        if learning_rate_decay:
+            def scheduler(step):
+                """ scheduler Function """
+                return alpha / (1 + decay_rate * step)
+            l_dec = K.callbacks.LearningRateScheduler(
+                scheduler=scheduler, verbose=1)
+            history = network.fit(x=data, y=labels, epochs=epochs,
+                                  verbose=verbose,
+                                  batch_size=batch_size,
+                                  validation_data=validation_data,
+                                  shuffle=shuffle, callbacks=[l_dec])
     if early_stopping:
         ea_st = K.callbacks.EarlyStopping(patience=patience)
         history = network.fit(
@@ -24,22 +37,8 @@ def train_model(
             y=labels,
             validation_data=validation_data,
             shuffle=shuffle,
-            epochs=epochs,
+            nb_epoch=epochs,
             verbose=verbose,
             batch_size=batch_size,
             callbacks=[ea_st])
-    if learning_rate_decay:
-        def scheduler(epoch):
-            return alpha / (1 + decay_rate) * epoch
-        le_rate = K.callbacks.LearningRateScheduler(
-            schedule=scheduler, verbose=1)
-        history = network.fit(
-            x=data,
-            y=labels,
-            validation_data=validation_data,
-            shuffle=shuffle,
-            epochs=epochs,
-            verbose=verbose,
-            batch_size=batch_size,
-            callbacks=[le_rate])
     return history
