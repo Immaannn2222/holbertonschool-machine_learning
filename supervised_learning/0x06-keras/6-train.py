@@ -15,11 +15,8 @@ def train_model(
         verbose=True,
         shuffle=False):
     """train the model using early stopping"""
-    if validation_data:
-        ea_st = K.callbacks.EarlyStopping(
-            monitor='val_loss', patience=patience)
-    else:
-        ea_st = None
+    if early_stopping:
+        ea_st = K.callbacks.EarlyStopping(patience=patience)
     history = network.fit(
         x=data,
         y=labels,
