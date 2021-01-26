@@ -9,7 +9,7 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     layerr = input_1
     for i in range(len(layers)):
         if i != 0:
-            layerr = K.layers.Dropout(lambtha)(layerr)
+            layerr = K.layers.Dropout(1 - keep_prob)(layerr)
         layerr = K.layers.Dense(
             layers[i],
             activation=activations[i],
