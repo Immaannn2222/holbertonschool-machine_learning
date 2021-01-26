@@ -13,8 +13,8 @@ def train_model(
         shuffle=False):
     """trains a model using mini-batch gradient descent"""
     history = network.fit(
-        data,
-        labels,
+        x=data,
+        y=labels,
         batch_size=batch_size,
         epochs=epochs,
         verbose=verbose,
