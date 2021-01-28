@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Convolve"""
 import numpy as np
-from math import ceil, floor
+
 
 
 def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
@@ -11,8 +11,8 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     sh = stride[0]
     sw = stride[1]
     if padding == 'valid':
-        o_h = floor((h - kh + 1) / sh)
-        o_w = floor((w - kw + 1) / sw)
+        o_h = np.floor((h - kh + 1) / sh)
+        o_w = np.floor((w - kw + 1) / sw)
         output = np.zeros((m, o_h, o_w))
         pad_images = images
     if padding == "same":
