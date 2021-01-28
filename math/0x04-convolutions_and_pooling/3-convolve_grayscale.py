@@ -1,4 +1,4 @@
-#!/usr/bin/env pjthon3
+#!/usr/bin/env python3
 """Convolve"""
 import numpy as np
 
@@ -40,17 +40,13 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
             pad_width=((0,), (padding[0],), (padding[1],)),
             mode="constant")
     for y in range(images.shape[2]):
-        # Exit Convolution
         if y > images.shape[1] - kw:
             break
-        # Only Convolve if y has gone down by the specified Strides
         if y % sw == 0:
             for x in range(images.shape[1]):
-                # Go to next row once kernel is out of bounds
                 if x > images.shape[0] - kh:
                     break
                 try:
-                    # Only Convolve if x has moved by the specified Strides
                     if x % sh == 0:
                         output[x, y] = (
                             kernel * pad_images[x * sh: x * sh + kh, y * sw: y * sw + kw]).sum()
