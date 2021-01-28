@@ -48,8 +48,8 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
                     break
                 try:
                     if x % sh == 0:
-                        output[x, y] = (
-                            kernel * pad_images[x * sh: x * sh + kh, y * sw: y * sw + kw]).sum()
+                        output[:,x, y] = (
+                            kernel * pad_images[:, x * sh: x * sh + kh, y * sw: y * sw + kw]).sum()
                 except BaseException:
                     break
 
