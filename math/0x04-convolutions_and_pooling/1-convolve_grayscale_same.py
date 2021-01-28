@@ -10,7 +10,7 @@ def convolve_grayscale_same(images, kernel):
     o_h = h
     o_w = w
     output = np.zeros((m, o_h, o_w))
-    
+
     if kh % 2 == 1:
         p_h = (kh - 1) // 2
     else:
@@ -19,7 +19,6 @@ def convolve_grayscale_same(images, kernel):
         p_w = (kw - 1) // 2
     else:
         p_w = kw // 2
-
 
     pad_images = np.pad(
         array=images,
