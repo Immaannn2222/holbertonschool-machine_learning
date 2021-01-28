@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Conv"""
+"""Convolve"""
 import numpy as np
 
 
@@ -10,9 +10,8 @@ def convolve_grayscale_same(images, kernel):
     o_h = h
     o_w = w
     output = np.zeros((m, o_h, o_w))
-    if(kh > 2) or (kw > 2):
-        p_h = int((kh - 1) / 2)
-        p_w = int((kw - 1) / 2)
+    p_h = int((kh - 1) / 2)
+    p_w = int((kw - 1) / 2)
 
     pad_images = np.pad(
         array=images,
