@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Convolve"""
 import numpy as np
+from math import ceil, floor
 
 
 def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
@@ -10,8 +11,8 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     sh = stride[0]
     sw = stride[1]
     if padding == 'valid':
-        o_h = (h - kh + 1) // sh
-        o_w = (w - kw + 1) // sw
+        o_h = floor((h - kh + 1) / sh)
+        o_w = floor((w - kw + 1) / sw)
         output = np.zeros((m, o_h, o_w))
         pad_images = images
     if padding == "same":
@@ -39,18 +40,10 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
             array=images,
             pad_width=((0,), (padding[0],), (padding[1],)),
             mode="constant")
-    for y in range(images.shape[2]):
-        if y > images.shape[1] - kw:
-            break
-        if y % sw == 0:
-            for x in range(images.shape[1]):
-                if x > images.shape[0] - kh:
-                    break
-                try:
-                    if x % sh == 0:
-                        output[:,x, y] = (
-                            kernel * pad_images[:, x * sh: x * sh + kh, y * sw: y * sw + kw]).sum()
-                except BaseException:
-                    break
-
+    for x in range(o_h):
+        for y in range(o_w):
+            output[:, x, y] = np.sum(
+                kernel * pad_images[:, x * sh:x * sh + kh, y * sw:y * sw + kw],
+                axis=(1, 2)
+            )
     return output
