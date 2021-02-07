@@ -34,5 +34,5 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
                        :] += dz * kernel
                     dW[:, :, :, y] += part_A * dz
                     db[:, :, :, y] += dZ[i, j, x, y]
-    dA = dA[:, p_h:h_prev + p_h, p_w:c_prev + p_w, :]
+    dA = dA[:, p_h:dA.shape[1] - p_h, p_w:dA.shape[2] - p_w, :]
     return dA, dW, db
