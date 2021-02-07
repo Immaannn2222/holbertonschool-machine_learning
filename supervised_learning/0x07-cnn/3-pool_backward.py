@@ -15,12 +15,12 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='max'):
             for x in range(w_new):
                 for y in range(c_new):
                     part_A = A_prev[i, j * sh:j *
-                                    sh + kh, x * sw:x * sw + kw, :]
+                                    sh + kh, x * sw:x * sw + kw, y]
                     if mode == "max":
                         res = (part_A == np.max(part_A))
                     else:
                         av = 1 / (kh * kw)
                         res = av * np.ones(kernel_shape)
                     da_prev[i, j * sh:j * sh + kh, x * sw:x *
-                            sw + kw, :] += res * dA[i, j, x, y]
+                            sw + kw, y] += res * dA[i, j, x, y]
     return da_prev
