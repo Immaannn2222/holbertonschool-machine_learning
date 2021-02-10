@@ -5,7 +5,7 @@ inception_block = __import__('0-inception_block').inception_block
 
 
 def inception_network():
-
+    """builds the inception network as described"""
     X = K.Input(shape=(224, 224, 3))
     layer = K.layers.Conv2D(
         filters=64,
@@ -54,7 +54,6 @@ def inception_network():
         strides=2,
         padding='same')(layer)
 
-    # stage-4
     layer = inception_block(layer, [192, 96, 208, 16, 48, 64])
     layer = inception_block(layer, [160, 112, 224, 24, 64, 64])
     layer = inception_block(layer, [128, 128, 256, 24, 64, 64])
