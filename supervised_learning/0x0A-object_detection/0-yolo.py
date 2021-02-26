@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""yolo"""
+"""OBJECT DETECTION YOLOV3"""
 import tensorflow.keras as K
 
 
