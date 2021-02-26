@@ -60,14 +60,14 @@ class Yolo:
         """ filter boxes """
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
-        """ """
+        """applies non max suppression"""
 
     @staticmethod
     def load_images(folder_path):
         """ imports images using cv"""
-        images = []
-        images_p = []
+        imgs = []
+        imgs_paths = []
         for path in glob.glob(folder_path + '/*'):
-            images.append(cv2.imread(path))
-            images_p.append(path)
-        return images, images_p
+            imgs.append(cv2.imread(path))
+            imgs_paths.append(path)
+        return imgs, imgs_paths
