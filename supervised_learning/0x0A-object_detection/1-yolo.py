@@ -20,7 +20,7 @@ class Yolo:
         return 1 / (1 + np.exp(x))
 
     def process_outputs(self, outputs, image_size):
-        """procees the output of a draknet model for a single image"""
+        """process outputs"""
         boxes = []
         box_confidences = []
         box_class_probs = []
