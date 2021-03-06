@@ -25,7 +25,7 @@ class Yolo:
         boxes = []
         box_conf = []
         cls_proba = []
-        image_height, image_width = image_size
+        img_h, img_w = image_size
         for output in outputs:
             boxes.append(output[..., 0:4])
             box_conf.append(self.sigmoid(output[..., 4]))
@@ -48,8 +48,8 @@ class Yolo:
             y1 = by - bh / 2
             x2 = x1 + bw
             y2 = y1 + bh
-            b[..., 0] = x1 * image_width
-            b[..., 1] = y1 * image_height
-            b[..., 2] = x2 * image_width
-            b[..., 3] = y2 * image_height
+            b[..., 0] = x1 * img_w
+            b[..., 1] = y1 * img_h
+            b[..., 2] = x2 * img_w
+            b[..., 3] = y2 * img_h
         return boxes, box_conf, cls_proba
