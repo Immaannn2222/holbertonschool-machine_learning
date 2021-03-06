@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """OBJECT DETECTION YOLOV3"""
-import numpy as np
 from tensorflow import keras as K
+import numpy as np
 
 
 class Yolo:
     """uses the Yolo v3 algorithm to perform object detection"""
-
     def __init__(self, model_path, classes_path, class_t, nms_t, anchors):
         """class constructor"""
         self.model = K.models.load_model(model_path)
@@ -23,14 +22,14 @@ class Yolo:
     def process_outputs(self, outputs, image_size):
         """procees the output of a draknet model for a single image"""
         boxes = []
-        box_conf = []
-        cls_prob = []
+        box_confidences = []
+        box_class_probs = []
         img_h, img_w = image_size
 
         for output in outputs:
             boxes.append(output[..., 0:4])
-            box_conf.append(self.sigmoid(output[..., 4, np.newaxis]))
-            cls_prob.append(self.sigmoid(output[..., 5:]))
+            box_confidences.append(self.sigmoid(output[..., 4, np.newaxis]))
+            box_class_probs.append(self.sigmoid(output[..., 5:]))
         for i, box in enumerate(boxes):
             gr_h, gr_w, anchors_boxes, _ = box.shape
             cx = np.indices((gr_h, gr_w, anchors_boxes))[1]
@@ -45,12 +44,12 @@ class Yolo:
             by = (self.sigmoid(t_y) + cy) / gr_h
             bw = (np.exp(t_w) * p_w) / self.model.input.shape[1].value
             bh = (np.exp(t_h) * p_h) / self.model.input.shape[2].value
-            x1 = bx - bw / 2
-            y1 = by - bh / 2
-            x2 = x1 + bw
-            y2 = y1 + bh
-            box[..., 0] = x1 * img_w
-            box[..., 1] = y1 * img_h
-            box[..., 2] = x2 * img_w
-            box[..., 3] = y2 * img_h
-        return boxes, box_conf, cls_prob
+            tl_x = bx - bw / 2
+            tl_y = by - bh / 2
+            br_x = bx + bw / 2
+            br_y = by + bh / 2
+            box[..., 0] = tl_x * img_w
+            box[..., 1] = tl_y * img_h
+            box[..., 2] = br_x * img_w
+            box[..., 3] = br_y * img_h
+        return boxes, box_confidences, box_class_probs
