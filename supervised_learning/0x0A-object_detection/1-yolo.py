@@ -24,32 +24,33 @@ class Yolo:
         """procees the output of a draknet model for a single image"""
         boxes = []
         box_conf = []
-        cls_proba = []
+        cls_prob = []
         img_h, img_w = image_size
+
         for output in outputs:
             boxes.append(output[..., 0:4])
-            box_conf.append(self.sigmoid(output[..., 4]))
-            cls_proba.append(self.sigmoid(output[..., 5:]))
-        for idx, b in enumerate(boxes):
-            grid_h, grid_w, anchors_boxes, _ = b.shape
-            cx = np.indices((grid_h, grid_w, anchors_boxes))[1]
-            cy = np.indices((grid_h, grid_w, anchors_boxes))[0]
-            tx = b[..., 0]
-            ty = b[..., 1]
-            width = b[..., 2]
-            height = b[..., 3]
-            anc_w = self.anchors[idx, :, 0]
-            anc_h = self.anchors[idx, :, 1]
-            bx = (self.sigmoid(tx) + cx) / grid_w
-            by = (self.sigmoid(ty) + cy) / grid_h
-            bw = (np.exp(width) * anc_w) / self.model.input.shape[1].value
-            bh = (np.exp(height) * anc_h) / self.model.input.shape[2].value
+            box_conf.append(self.sigmoid(output[..., 4, np.newaxis]))
+            cls_prob.append(self.sigmoid(output[..., 5:]))
+        for i, box in enumerate(boxes):
+            gr_h, gr_w, anchors_boxes, _ = box.shape
+            cx = np.indices((gr_h, gr_w, anchors_boxes))[1]
+            cy = np.indices((gr_h, gr_w, anchors_boxes))[0]
+            t_x = box[..., 0]
+            t_y = box[..., 1]
+            t_w = box[..., 2]
+            t_h = box[..., 3]
+            p_w = self.anchors[i, :, 0]
+            p_h = self.anchors[i, :, 1]
+            bx = (self.sigmoid(t_x) + cx) / gr_w
+            by = (self.sigmoid(t_y) + cy) / gr_h
+            bw = (np.exp(t_w) * p_w) / self.model.input.shape[1].value
+            bh = (np.exp(t_h) * p_h) / self.model.input.shape[2].value
             x1 = bx - bw / 2
             y1 = by - bh / 2
             x2 = x1 + bw
             y2 = y1 + bh
-            b[..., 0] = x1 * img_w
-            b[..., 1] = y1 * img_h
-            b[..., 2] = x2 * img_w
-            b[..., 3] = y2 * img_h
-        return boxes, box_conf, cls_proba
+            box[..., 0] = x1 * img_w
+            box[..., 1] = y1 * img_h
+            box[..., 2] = x2 * img_w
+            box[..., 3] = y2 * img_h
+        return boxes, box_conf, cls_prob
