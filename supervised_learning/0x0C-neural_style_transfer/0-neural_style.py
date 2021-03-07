@@ -2,6 +2,8 @@
 """TRANSFER LEARNING STYLE"""
 import numpy as np
 import tensorflow as tf
+tf.enable_eager_execution()
+
 
 
 class NST():
@@ -32,7 +34,6 @@ class NST():
             raise TypeError("alpha must be a non-negative number")
         if not isinstance(beta, (float, int)) or beta < 0:
             raise TypeError("beta must be a non-negative number")
-        tf.enable_eager_execution()
         self.style_image = self.scale_image(style_image)
         self.content_image = self.scale_image(content_image)
         self.alpha = alpha
