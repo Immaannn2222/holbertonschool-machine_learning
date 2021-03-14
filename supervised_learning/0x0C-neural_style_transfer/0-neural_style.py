@@ -5,7 +5,6 @@ import tensorflow as tf
 tf.enable_eager_execution()
 
 
-
 class NST():
     """performs tasks for neural style transfer"""
     style_layers = [
@@ -20,13 +19,13 @@ class NST():
         """the class constructor"""
         if not isinstance(
             style_image,
-            np.ndarray) and \
+            np.ndarray) or \
                 style_image.ndim != 3 or style_image.shape[2] != 3:
             raise TypeError(
                 "style_image must be a numpy.ndarray with shape (h, w, 3)")
         if not isinstance(
             content_image,
-            np.ndarray) and \
+            np.ndarray) or \
                 content_image.ndim != 3 or content_image.shape[2] != 3:
             raise TypeError(
                 "content_image must be a numpy.ndarray with shape (h, w, 3)")
