@@ -41,7 +41,7 @@ class NST():
         """preprocess the image"""
         if not isinstance(
                 image,
-                np.ndarray) and image.ndim != 3 or image.shape[2] != 3:
+                np.ndarray) or image.ndim != 3 or image.shape[2] != 3:
             raise TypeError(
                 "image must be a numpy.ndarray with shape (h, w, 3)")
         img_h, img_w, _ = image.shape
