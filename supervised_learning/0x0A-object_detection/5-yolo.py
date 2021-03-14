@@ -65,12 +65,12 @@ class Yolo:
     @staticmethod
     def load_images(folder_path):
         """ imports images using cv"""
-        is = []
-        is_paths = []
+        imgs = []
+        imgs_paths = []
         for path in glob.glob(folder_path + '/*'):
-            is.append(cv2.imread(path))
-            is_paths.append(path)
-        return is, is_paths
+            imgs.append(cv2.imread(path))
+            imgs_paths.append(path)
+        return imgs, imgs_paths
 
     def preprocess_images(self, images):
         """Resize the images with inter-cubic interpolation
@@ -84,7 +84,7 @@ class Yolo:
                                interpolation=cv2.INTER_CUBIC)
             image = image / 255
             x.append(image)
-            y.append(i.y[:-1])
+            y.append(i.shape[:-1])
         pimages = np.stack(x, axis=0)
         img_shapes = np.stack(y, axis=0)
         return (pimages, img_shapes)
