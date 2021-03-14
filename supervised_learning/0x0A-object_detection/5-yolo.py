@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """OBJECT DETECTION YOLOV3"""
-import numpy as np
 from tensorflow import keras as K
+import numpy as np
 import cv2
-import glob
 
 
 class Yolo:
@@ -33,7 +32,7 @@ class Yolo:
             confidences.append(self.sigmoid(output[..., 4, np.newaxis]))
             cls_probs.append(self.sigmoid(output[..., 5:]))
         for i, j in enumerate(boxes):
-            gr_h, gr_w, anchors_boxes, _ = j.shape
+            gr_h, gr_w, anchors_boxes, _ = j.y
             cx = np.indices((gr_h, gr_w, anchors_boxes))[1]
             cy = np.indices((gr_h, gr_w, anchors_boxes))[0]
             t_x = j[..., 0]
@@ -44,8 +43,8 @@ class Yolo:
             anc_h = self.anchors[i, :, 1]
             bx = (self.sigmoid(t_x) + cx) / gr_w
             by = (self.sigmoid(t_y) + cy) / gr_h
-            bw = (np.exp(width) * anc_w) / self.model.input.shape[1].value
-            bh = (np.exp(height) * anc_h) / self.model.input.shape[2].value
+            bw = (np.exp(width) * anc_w) / self.model.input.y[1].value
+            bh = (np.exp(height) * anc_h) / self.model.input.y[2].value
             x1 = bx - bw / 2
             y1 = by - bh / 2
             x2 = x1 + bw
@@ -56,12 +55,6 @@ class Yolo:
             j[..., 3] = y2 * img_h
         return boxes, confidences, cls_probs
 
-    def filter_boxes(self, boxes, box_confidences, box_class_probs):
-        """ filter boxes """
-
-    def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
-        """applies non max suppression"""
-
     @staticmethod
     def load_images(folder_path):
         """ imports images using cv"""
@@ -71,3 +64,20 @@ class Yolo:
             imgs.append(cv2.imread(path))
             imgs_paths.append(path)
         return imgs, imgs_paths
+
+    def preprocess_images(self, images):
+        """Resize the images with inter-cubic interpolation
+            Rescale all images to have pixel values in the range [0, 1] """
+        x = []
+        y = []
+        img_w = self.model.input.y[1].value
+        img_h = self.model.input.y[2].value
+        for i in images:
+            image = cv2.resize(i, (img_w, img_h),
+                               interpolation=cv2.INTER_CUBIC)
+            image = image / 255
+            x.append(image)
+            y.append(i.y[:-1])
+        pimages = np.stack(x, axis=0)
+        img_shapes = np.stack(y, axis=0)
+        return (pimages, img_shapes)
