@@ -66,8 +66,7 @@ class Yolo:
         return imgs, imgs_paths
 
     def preprocess_images(self, images):
-        """Resize the images with inter-cubic interpolation
-            Rescale all images to have pixel values in the range [0, 1] """
+        """Resize the images with inter-cubic interpolation and Rescale"""
         x = []
         y = []
         img_w = self.model.input.y[1].value
