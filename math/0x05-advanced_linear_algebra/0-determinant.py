@@ -6,12 +6,10 @@ def determinant(matrix):
     """function that calculates the determinant of a matrix"""
     if not isinstance(matrix, list):
         raise TypeError('matrix must be a list of lists')
-    if not all(isinstance(i, list) for i in matrix):
-        raise TypeError('matrix must be a list of lists')
     if matrix == [[]] or len(matrix[0]) == 0:
         return 1
     if len(matrix[0]) == 1:
-        return matrix[0][0]
+        return matrix
     if len(matrix) != len(matrix[0]):
         raise ValueError('matrix must be a square matrix')
     if len(matrix) == 2 and len(matrix[0]) == 2:
