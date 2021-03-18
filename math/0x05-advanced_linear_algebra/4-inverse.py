@@ -99,8 +99,9 @@ def inverse(matrix):
     if len(matrix[0]) == 0:
         raise ValueError('matrix must be a non-empty square matrix')
     det = determinant(matrix)
+    adjugate_mat = adjugate(matrix)
     if det == 0:
         return None
-    adjugate_mat = adjugate(matrix)
-    return [[1 / det * adjugate_mat[i][j] for j in range(len(matrix[0]))]
-            for i in range(len(matrix))]
+    else:
+        return [[1 / det * adjugate_mat[i][j] for j in range(len(matrix[0]))]
+                for i in range(len(matrix))]
