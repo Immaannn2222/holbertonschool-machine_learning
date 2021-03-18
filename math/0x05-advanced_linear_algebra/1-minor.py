@@ -48,8 +48,8 @@ def minor(matrix):
     n = len(matrix)
     if n == 1:
         return matrix[0][0]
-    if n == 2:
-        return [elem[::-1] for elem in matrix][::-1]
+    # if n == 2:
+    #     return [elem[::-1] for elem in matrix][::-1]
     else:
         final_list = []
         for i in range(n):
