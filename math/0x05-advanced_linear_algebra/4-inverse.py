@@ -90,6 +90,14 @@ def adjugate(matrix):
 
 def inverse(matrix):
     """calculates the inverse of a matrix"""
+    if not isinstance(matrix, list) or matrix == []:
+        raise TypeError('matrix must be a list of lists')
+    if any(not isinstance(i, list) for i in matrix):
+        raise TypeError('matrix must be a list of lists')
+    if any(len(i) != len(matrix) for i in matrix):
+        raise ValueError('matrix must be a non-empty square matrix')
+    if len(matrix[0]) == 0:
+        raise ValueError('matrix must be a non-empty square matrix')
     det = determinant(matrix)
     if det == 0:
         return None
