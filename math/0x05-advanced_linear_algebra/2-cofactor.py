@@ -75,10 +75,8 @@ def cofactor(matrix):
     n = len(matrix)
     if n == 1:
         return [[1]]
-    new = []
-    for j in range(len(matrix)):
-        li = []
-        li = (minor(matrix))
-        for i in range(len(matrix)):
-            new.append(((-1) ** (i + j) * (minor(matrix)[i][j])))
-    return new
+    minor_mat = minor(matrix)
+    for i in range(len(minor_mat)):
+        for j in range(len(minor_mat)):
+            minor_mat[i][j] = minor_mat[i][j] * ((-1) ** (i + j))
+    return minor_mat
