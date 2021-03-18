@@ -51,9 +51,12 @@ def minor(matrix):
     if n == 2:
         return [elem[::-1] for elem in matrix][::-1]
     else:
-        listt = []
+        final_list = []
         for i in range(n):
+            listt = []
             for j in range(n):
-                new_mat = [col[:j] + col[j + 1:] for col in (matrix[:i] + matrix[i + 1:])]
+                new_mat = [col[:j] + col[j + 1:] for
+                           col in (matrix[:i] + matrix[i + 1:])]
                 listt.append(determinant(new_mat))
-        return listt
+            final_list.append((listt))
+        return final_list
