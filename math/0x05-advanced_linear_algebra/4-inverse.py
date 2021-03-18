@@ -102,6 +102,5 @@ def inverse(matrix):
     adjugate_mat = adjugate(matrix)
     if det == 0:
         return None
-    else:
-        return [[adjugate_mat / det for j in range(len(matrix[0]))]
-                for i in range(len(matrix))]
+    return [[1 / det * adjugate_mat[i][j] for j in range(len(matrix[0]))]
+            for i in range(len(matrix))]
