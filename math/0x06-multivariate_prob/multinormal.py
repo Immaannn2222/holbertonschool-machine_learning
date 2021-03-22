@@ -18,14 +18,12 @@ class MultiNormal:
 
     def pdf(self, x):
         """calculates the PDF at a data point"""
-        if type(x) is not np.ndarray:
-            raise TypeError("x must be a numpy.ndarray")
-        if len(x.shape) != 2 or x.shape[1] != 1\
-           or x.shape[0] != self.mean.shape[0]:
-            raise ValueError("x must have the shape ({}, 1)"
-                             .format(self.mean.shape[0]))
-        d = self.cov.shape[0]
-        x_m = x - self.mean
-        sqrt = np.sqrt((2 * np.pi)**d * np.linalg.det(self.cov))
-        exp = np.exp(-(np.linalg.solve(self.cov, x_m).T.dot(x_m)) / 2)
-        return (1 / (sqrt) * exp)[0][0]
+        d, _ = self.cov.shape
+        if not isinstance(x, np.ndarray):
+            raise TypeError('x must be a numpy.ndarray')
+        if x.ndim != 2 or (x.shape[0] != d)or (x.shape[1] != 1):
+            raise ValueError("x must have the shape ({}, 1)".format(d))
+        me_an = x - self.mean
+        st = np.sqrt((2 * np.pi) ** d * np.linalg.det(self.cov))
+        exp = np.exp(-(np.linalg.solve(self.cov, me_an).T.dot(me_an)) / 2)
+        return (1 / (st) * exp)[0][0]
