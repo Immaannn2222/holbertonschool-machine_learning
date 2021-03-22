@@ -23,7 +23,7 @@ class MultiNormal:
             raise TypeError('x must be a numpy.ndarray')
         if x.ndim != 2 or (x.shape[0] != d)or (x.shape[1] != 1):
             raise ValueError("x must have the shape ({}, 1)".format(d))
-        x_m = x - self.mean
-        sqrt = np.sqrt((2 * np.pi)**d * np.linalg.det(self.cov))
-        exp = np.exp(-(np.linalg.solve(self.cov, x_m).T.dot(x_m)) / 2)
-        return (1 / (sqrt) * exp)[0][0]
+        me_an = x - self.mean
+        st = np.sqrt((2 * np.pi) ** d * np.linalg.det(self.cov))
+        exp = np.exp(-(np.linalg.solve(self.cov, me_an).T.dot(me_an)) / 2)
+        return (1 / (st) * exp)[0][0]
