@@ -36,8 +36,6 @@ def posterior(x, n, p1, p2):
                          greater than or equal to 0")
     if x > n:
         raise ValueError('x cannot be greater than n')
-    if not isinstance(P, np.ndarray) or P.ndim != 1:
-        raise TypeError("P must be a 1D numpy.ndarray")
     if not isinstance(p1, float) or 0 > p1 > 1:
         raise ValueError("p1 must be a float in the range [0, 1]")
     if not isinstance(p2, float) or 0 > p2 > 1:
