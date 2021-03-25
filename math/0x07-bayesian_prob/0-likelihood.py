@@ -18,5 +18,5 @@ def likelihood(x, n, P):
     if not ((0 <= P).all() and (P <= 1).all()):
         raise ValueError("All values in P must be in the range [0, 1]")
     combinaison = f(n) / (f(x) * f(n - x))
-    R = combinaison * (P ** x) * (np.power((1 - P), (n - x)))
+    R = combinaison * np.power(P, x) * (np.power((1 - P), (n - x)))
     return R
