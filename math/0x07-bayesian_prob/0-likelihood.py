@@ -6,9 +6,9 @@ from math import factorial as f
 
 def likelihood(x, n, P):
     """calculates the likelihood of data various hypothetical probabilities"""
-    if not isinstance(x, int) or n < 0:
+    if not isinstance(x, int) or n < 1:
         raise ValueError("n must be a positive integer")
-    if not isinstance(x, int) or x <= 0:
+    if not isinstance(x, int) or x < 0:
         raise ValueError("x must be an inte\
                          ger that is greater than or equal to 0")
     if x > n:
