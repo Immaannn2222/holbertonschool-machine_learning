@@ -1,30 +1,7 @@
 #!/usr/bin/env python3
 """BAYESIAN PROBAB"""
 import numpy as np
-from math import factorial as f
 from scipy import special
-
-
-def likelihood(x, n, P):
-    """calculates the likelihood of data various hypothetical probabilities"""
-    combinaison = f(n) / (f(x) * f(n - x))
-    R = combinaison * np.power(P, x) * (np.power((1 - P), (n - x)))
-    return R
-
-
-def intersection(x, n, P, Pr):
-    """calculates the intersection with various hypothetical probabilities"""
-    return likelihood(x, n, P) * Pr
-
-
-def marginal(x, n, P, Pr):
-    """calculates the marginal probability of obtaining the data"""
-    return np.sum(intersection(x, n, P, Pr))
-
-
-def posterior(x, n, P, Pr):
-    """calculates the posterior probability"""
-    return intersection(x, n, P, Pr) / marginal(x, n, P, Pr)
 
 
 def posterior(x, n, p1, p2):
