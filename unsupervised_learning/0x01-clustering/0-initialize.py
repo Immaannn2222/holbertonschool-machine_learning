@@ -10,6 +10,6 @@ def initialize(X, k):
     high_b = np.max(X, axis=0)
     try:
         centroids = np.random.uniform(low_b, high_b, (k, d))
-        return centroids
     except Exception:
         return None
+    return centroids
