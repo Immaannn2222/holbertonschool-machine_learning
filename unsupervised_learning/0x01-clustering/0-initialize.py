@@ -5,6 +5,8 @@ import numpy as np
 
 def initialize(X, k):
     """initializes cluster centroids for K-means"""
+    if not isinstance(k, int) or K < 0:
+        return TypeError
     try:
         low_b = np.min(X, axis=0)
         high_b = np.max(X, axis=0)
