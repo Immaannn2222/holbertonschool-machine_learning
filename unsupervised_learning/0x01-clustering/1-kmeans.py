@@ -21,12 +21,14 @@ def kmeans(X, k, iterations=1000):
     """performs K-means on a dataset"""
     if not isinstance(iterations, int) or iterations <= 0:
         return None, None
-    centroids = initialize(X, k)
-    centroids_copy = np.copy(centroids)
-    n, d = X.shape
-    if centroids is None:
+    if not isinstance(X, np.ndarray) or X.ndim != 2:
         return None, None
+    if not isinstance(k, int) or k <= 0:
+        return None, None
+    centroids = initialize(X, k)
+    _, d = X.shape
     for j in range(iterations):
+        centroids_copy = np.copy(centroids)
         distance = np.linalg.norm(X - centroids[:, np.newaxis], axis=2)
         clusters = distance.argmin(axis=0)
         for i in range(k):
