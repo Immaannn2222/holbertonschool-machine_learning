@@ -27,17 +27,16 @@ def kmeans(X, k, iterations=1000):
     if centroids is None:
         return None, None
     for j in range(iterations):
-        dist = np.linalg.norm(
-            np.expand_dims(centroids.T, 0) - np.expand_dims(X, 2), axis=1)
-        clusters = dist.argmin(axis=1)
+        distance = np.linalg.norm(X - centroids[:, np.newaxis], axis=2)
+        clusters = distance.argmin(axis=0)
         for i in range(k):
-            if i in clusters:
-                centroids[i, :] = np.mean(X[clusters == i, :], axis=0)
+            assigned = np.argwhere(clusters == i)
+            if (len(assigned) == 0):
+                centroids[i] = initialize(X, 1)
             else:
-                k == 1
-                centroids = initialize(X, k)
-        if (centroids_copy == centroids).all():
+                centroids[i] = np.mean(X[assigned], axis=0)
+        if (centroids == centroids_copy).all():
             break
-        else:
-            centroids_copy = np.copy(centroids)
+    distance = np.linalg.norm(X - centroids[:, np.newaxis], axis=2)
+    clusters = distance.argmin(axis=0)
     return centroids, clusters
