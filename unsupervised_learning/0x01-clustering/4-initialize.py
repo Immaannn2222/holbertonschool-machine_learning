@@ -8,7 +8,7 @@ def initialize(X, k):
     """initializes variables for a Gaussian Mixture Model"""
     if not isinstance(X, np.ndarray) or X.ndim != 2:
         return None, None, None
-    if not isinstance(k, int) or k < 0:
+    if not isinstance(k, int) or k <= 0:
         return None, None, None
     _, d = X.shape
     C, clss = kmeans(X, k)
