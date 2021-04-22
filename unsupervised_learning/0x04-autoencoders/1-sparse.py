@@ -11,8 +11,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
     encoded = model_input
     for hidden_layer in hidden_layers:
         encoded = Dense(
-            hidden_layer, activation='relu',
-            activity_regularizer=regu.l1(lambtha))(
+            hidden_layer, activation='relu')(
                 encoded)
     encoded = Dense(
         latent_dims, activation='relu',
