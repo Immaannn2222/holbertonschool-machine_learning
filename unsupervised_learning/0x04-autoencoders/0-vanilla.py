@@ -7,8 +7,9 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     """creates an auto"""
     Dense = keras.layers.Dense
     model_input = keras.Input((input_dims,))
+    encoded = model_input
     for hidden_layer in hidden_layers:
-        encoded = Dense(hidden_layer, activation='relu')(model_input)
+        encoded = Dense(hidden_layer, activation='relu')(encoded)
     encoded = Dense(latent_dims, activation='relu')(encoded)
     encoder = keras.Model(model_input, encoded)
     decode_0 = keras.Input((latent_dims,))
