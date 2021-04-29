@@ -11,5 +11,17 @@ Advantages and 	Drawbacks
 • Model size not increasing with size of input
 • Computation takes into account historical information
 • Weights are shared across time 	• Computation being slow
+• Difficulty of accessing information from a long time agoArchitecture of a traditional RNN Recurrent neural networks, also known as RNNs, are a class of neural networks that allow previous outputs to be used as inputs while having hidden states. They are typically as follows:
+
+
+The pros and cons of a typical RNN architecture are summed up in the table below:
+
+Advantages 	Drawbacks
+• Possibility of processing input of any length
+• Model size not increasing with size of input
+• Computation takes into account historical information
+• Weights are shared across time 	• Computation being slow
 • Difficulty of accessing information from a long time ago
+• Cannot consider any future input for the current state
+
 • Cannot consider any future input for the current state

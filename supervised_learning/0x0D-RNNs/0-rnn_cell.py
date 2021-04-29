@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """RNN"""
 import numpy as np
-from scipy.special import softmax
 
 
 class RNNCell:
@@ -13,6 +12,11 @@ class RNNCell:
         self.bh = np.zeros(shape=(1, h))
         self.by = np.zeros(shape=(1, o))
 
+    def softmax(self, v):
+        """Calculates the softmax activation function"""
+        prob = np.exp(v - np.max(v))
+        return prob / prob.sum(axis=1, keepdims=True)
+
     def forward(self, h_prev, x_t):
         """performs forward propagation for one time step"""
         # Returns: h_next, y
@@ -21,5 +25,5 @@ class RNNCell:
         a = np.concatenate((h_prev, x_t), axis=1)
         h_t = np.tanh(np.matmul(a, self.Wh) + self.bh)
         y = np.dot(h_t, self.Wy) + self.by
-        y = softmax(y, axis=1)
+        y = self.softmax(y)
         return h_t, y
