@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""RNN"""
+"""RNN class"""
 import numpy as np
 
 
