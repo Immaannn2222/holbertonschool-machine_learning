@@ -10,6 +10,7 @@ def rnn(rnn_cell, X, h_0):
     H = np.zeros((t + 1, m, h))
     Y = np.zeros((t, m, o))
     H[0] = h_0
-    for timestep in range(t):
-        H[timestep], Y[timestep] = rnn_cell.forward(h_0, X[timestep, :, :])
+    for timestep in range(1, t + 1):
+        H[timestep], Y[timestep - 1] = rnn_cell.forward(
+            H[timestep - 1], X[timestep - 1])
     return H, Y
