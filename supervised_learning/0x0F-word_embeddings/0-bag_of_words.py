@@ -9,4 +9,4 @@ def bag_of_words(sentences, vocab=None):
     tokens = Vec.fit_transform(sentences)
     feature = Vec.get_feature_names()
     embedding = tokens.toarray()
-    return feature, embedding
+    return embedding, feature
