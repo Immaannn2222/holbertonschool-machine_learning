@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+"""ATTENTION NLP"""
 import tensorflow as tf
 MultiHeadAttention = __import__('6-multihead_attention').MultiHeadAttention
 
