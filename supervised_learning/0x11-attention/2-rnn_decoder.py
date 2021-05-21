@@ -4,7 +4,7 @@ import tensorflow as tf
 SelfAttention = __import__('1-self_attention').SelfAttention
 
 
-class RNNDecoder(tensorflow.keras.layers.Layer):
+class RNNDecoder(tf.keras.layers.Layer):
     """ decode for machine translation"""
     def __init__(self, vocab, embedding, units, batch):
         """class constructor"""

@@ -3,7 +3,7 @@
 import tensorflow as tf
 
 
-class RNNEncoder(tensorflow.keras.layers.Layer):
+class RNNEncoder(tf.keras.layers.Layer):
     """encode for machine translation"""
     def __init__(self, vocab, embedding, units, batch):
         """class constructor"""

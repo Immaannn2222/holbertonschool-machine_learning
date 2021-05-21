@@ -3,7 +3,7 @@
 import tensorflow as tf
 
 
-class SelfAttention(tensorflow.keras.layers.Layer):
+class SelfAttention(tf.keras.layers.Layer):
     """calculate the attention for machine translation based
         on Dzmitry BahdanauJacobs, KyungHyun Cho and Yoshua Bengio
         conference paper  at ICLR 2015"""
