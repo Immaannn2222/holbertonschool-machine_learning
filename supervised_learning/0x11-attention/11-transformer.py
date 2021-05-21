@@ -18,6 +18,7 @@ class Transformer(tf.keras.Model):
             N, dm, h, hidden,
             target_vocab, max_seq_target, drop_rate)
         self.linear = tf.keras.layers.Dense(target_vocab)
+
     def call(self, inputs, target, training, encoder_mask,
              look_ahead_mask, decoder_mask):
         """ call function """
