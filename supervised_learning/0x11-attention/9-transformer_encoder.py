@@ -29,5 +29,5 @@ class Encoder(tf.keras.layers.Layer):
         x += self.positional_encoding[:seq_len, :]
         x = self.dropout(x, training=training)
         for j in range(self.N):
-            i = self.blocks[j](x, training, mask)
-        return i
+            x = self.blocks[j](x, training, mask)
+        return x
