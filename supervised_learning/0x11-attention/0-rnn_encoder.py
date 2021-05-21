@@ -12,8 +12,8 @@ class RNNEncoder(tf.keras.layers.Layer):
         self.units = units
         self.embedding = tf.keras.layers.Embedding(vocab, embedding)
         self.gru = tf.keras.layers.GRU(
-            units=units, kernel_initializer='glorot_unif\
-                orm', return_sequences=True, return_state=True)
+            units=units, kernel_initializer='glorot_uniform',
+            return_sequences=True, return_state=True)
 
     def initialize_hidden_state(self):
         """Initializes the hidden states to a tensor of zeros"""
