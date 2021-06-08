@@ -10,8 +10,6 @@ def absorbing(P):
         return None
     if n != m:
         return None
-    if np.any(P < 0):
-        return None
     if not np.all(np.isclose(P.sum(axis=1), 1)):
         return None
     return np.any(P.diagonal() == 1)
