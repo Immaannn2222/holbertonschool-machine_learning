@@ -29,3 +29,6 @@ class BayesianOptimization:
             Z) + sigma * norm.pdf(Z)
         X_next = self.X_s[np.argmax(EI)]
         return X_next, EI
+
+    def optimize(self, iterations=100):
+        """optimizes the black-box function"""
