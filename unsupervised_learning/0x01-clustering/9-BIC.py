@@ -22,20 +22,22 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
         return None, None, None, None
 
     n, d = X.shape
-    x = []
-    y = []
+    b_lst = []
+    l_lst = []
     results = []
-    n_cluster = np.arange(kmin, kmax + 1)
+    ks = []
     for k in range(kmin, kmax + 1):
-        pi, m, S, g, L = expectation_maximization(
-            X, k, iterations, tol, verbose)
+        ks.append(k)
+        em = expectation_maximization(X, k, iterations, tol, verbose)
+        pi, m, S, g, L = em
         results.append((pi, m, S))
         p = k * d + (k - 1) + k * d * (d + 1) / 2
-        x.append(p * np.log(X.shape[0]) - 2 * L)
-        y.append(L)
-    b = np.array(x)
-    likelihood = np.array(y)
-    idx = np.argmin(b)
-    best_k = n_cluster[idx]
-    best_result = results[idx]
-    return best_k, best_result, likelihood, b
+        b_lst.append(p * np.log(X.shape[0]) - 2 * L)
+        l_lst.append(L)
+
+    bics = np.array(b_lst)
+    liklihoods = np.array(l_lst)
+    best_idx = np.argmin(bics)
+    best_k = ks[best_idx]
+    best_result = results[best_idx]
+    return best_k, best_result, liklihoods, bics
