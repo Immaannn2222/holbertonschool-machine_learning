@@ -13,14 +13,6 @@ def NGrams_tokenize(wordlist, n):
 
 def ngram_bleu(references, sentence, n):
     """calculates the n-gram BLEU score for a sentence"""
-    unigrams = len(sentence)
-    token = np.array([len(x) for x in references])
-    idx = np.argmin(np.abs(token - unigrams))
-    x = len(references[idx])
-    if x > unigrams:
-        bp = np.exp(1 - x / unigrams)
-    else:
-        bp = 1
     references = list(NGrams_tokenize(x, n) for x in references)
     sentence = NGrams_tokenize(sentence, n)
     words = {}
@@ -32,7 +24,7 @@ def ngram_bleu(references, sentence, n):
             else:
                 words.update({word: ref.count(word)})
     p = (sum(words.values())) / len(sentence)
-    return bp * p
+    return p
 
 
 def cumulative_bleu(references, sentence, n):
