@@ -20,7 +20,7 @@ def ngram_bleu(references, sentence, n):
     if x > unigrams:
         bp = np.exp(1 - x / unigrams)
     else:
-        return 1
+        bp = 1
     references = list(NGrams_tokenize(x, n) for x in references)
     sentence = NGrams_tokenize(sentence, n)
     words = {}
@@ -44,7 +44,7 @@ def cumulative_bleu(references, sentence, n):
     if x > sen_size:
         bp = np.exp(1 - x / sen_size)
     else:
-        return 1
+        bp = 1
     ngrams = []
     for i in range(1, n + 1):
         ngrams.append(ngram_bleu(references, sentence, i))
