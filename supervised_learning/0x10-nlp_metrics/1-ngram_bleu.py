@@ -31,5 +31,5 @@ def ngram_bleu(references, sentence, n):
                     words.update({word: ref.count(word)})
             else:
                 words.update({word: ref.count(word)})
-    p = (sum(words.values())) / len(sentence)
-    return bp * p
+    p = sum(words.values())
+    return bp * p / len(sentence)
