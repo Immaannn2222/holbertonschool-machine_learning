@@ -20,7 +20,7 @@ def ngram_bleu(references, sentence, n):
     if r > unigrams:
         bp = np.exp(1 - r / unigrams)
     else:
-        return 1
+        bp = 1
     references = list(NGrams_tokenize(r, n) for r in references)
     sentence = NGrams_tokenize(sentence, n)
     words = {}
