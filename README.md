@@ -17,12 +17,9 @@
 ## Screenshots
 
 
-| Training a supervised model       | Clustering                                | Right-aligned         |
-| :-------------------------:       | :---------------------------------------: | --------------------: |
+| Training a supervised model       | Clustering                                | Hidden Markov Chain      |
+| :-------------------------:       | :---------------------------------------: | --------------------:    |
 | ![train](/screenshot/train.png)   | ![cluster](/screenshot/clustering.png)    |  ![Hidden Markov](/screenshot/unsuper.png)
-|
-|                                   |                                           |      |
-
 
 ## General description
 
