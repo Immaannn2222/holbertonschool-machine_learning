@@ -16,19 +16,12 @@
 
 ## Screenshots
 
-![train](/screenshot/train.png "Training a supervised model")
 
-
-
-![cluster](/screenshot/clustering.png)
-
-
-
-![plot](/screenshot/plotting_example.png)
-
-
-
-![Hidden Markov](/screenshot/unsuper.png)
+| Training a supervised model       | Clustering                                | Right-aligned         |
+| :-------------------------:       | :---------------------------------------: | --------------------: |
+| ![train](/screenshot/train.png)   | ![cluster](/screenshot/clustering.png)    |  ![Hidden Markov](/screenshot/unsuper.png)
+|
+|                                   |                                           |      |
 
 
 ## General description
