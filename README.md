@@ -16,10 +16,10 @@
 
 ## Screenshots
 
-![train] (/screenshot/train.png "Training a supervised model")
-![cluster] (/screenshot/clustering.png)
-![plot] (/screenshot/plotting_example.png)
-![Hidden Markov] (/screenshot/unsuper.png)
+![train](/screenshot/train.png "Training a supervised model")
+![cluster](/screenshot/clustering.png)
+![plot](/screenshot/plotting_example.png)
+![Hidden Markov](/screenshot/unsuper.png)
 
 
 ## General description
@@ -53,6 +53,7 @@ Starting off with the Deep Q-learning algorithm... Description will be updated
 
 - Keras
 - TensorFlow
+- matplotlib
 - numpy
 - csv
 
