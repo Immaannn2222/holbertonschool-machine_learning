@@ -17,8 +17,17 @@
 ## Screenshots
 
 ![train](/screenshot/train.png "Training a supervised model")
+
+
+
 ![cluster](/screenshot/clustering.png)
+
+
+
 ![plot](/screenshot/plotting_example.png)
+
+
+
 ![Hidden Markov](/screenshot/unsuper.png)
 
 
