@@ -10,10 +10,10 @@ def availableShips(passengerCount):
     available = []
     SWAPI_url = 'https://swapi-api.hbtn.io/api/starships/?'
     response = requests.get(SWAPI_url).json()
-    while response['next'] != None: ##handle the pagination
+    while response['next']:
         for ship in response['results']:
-            ship["passengers"].replace(',', '')
-            if ship["passengers"].isdigit() and int(ship["passengers"]) >= passengerCount:
+            p = ship["passengers"].replace(',', '')
+            if p.isdigit() and int(p) >= passengerCount:
                 available.append(ship['name'])
         SWAPI_url = response['next']
         response = requests.get(SWAPI_url).json()
