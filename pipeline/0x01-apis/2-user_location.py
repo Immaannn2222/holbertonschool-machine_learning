@@ -12,7 +12,7 @@ if __name__ == '__main__':
     response = requests.get(url)
     if response.status_code == 200:
         print(response.json()['location'])
-    if response.status_code == 404:
+    elif response.status_code == 404:
         print('Not found')
     elif response.status_code == 403:
         chrono = datetime.fromtimestamp(

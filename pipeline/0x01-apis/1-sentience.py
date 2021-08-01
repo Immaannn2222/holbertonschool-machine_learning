@@ -11,10 +11,10 @@ def sentientPlanets():
     response = requests.get(SWAPI_url).json()
     planets = []
     while response['next']:
-        for species in response['results']:
-                    if species['homeworld']:
-                        planet = requests.get(species['homeworld']).json()['name']
-                        planets.append(planet)
-        SWAPI_url = response['next']
-        response = requests.get(SWAPI_url).json()
+        for sentinent in response['results']:
+            if sentinent['homeworld']:
+                planet_name = requests.get(
+                    sentinent['homeworld']).json()['name']
+                planets.append(planet_name)
+        requests.get(response['next']).json()
     return planets
