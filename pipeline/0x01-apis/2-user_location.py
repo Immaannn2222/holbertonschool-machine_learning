@@ -12,7 +12,7 @@ if __name__ == '__main__':
     response = requests.get(url)
     if response.status_code == 404:
         print('Not found')
-    if response.status_code == 200:
+    elif response.status_code == 200:
         print(response.json()['location'])
     elif response.status_code == 403:
         header = response.headers['X-Ratelimit-Reset']
