@@ -14,8 +14,8 @@ if __name__ == '__main__':
         print(response.json()['location'])
     if response.status_code == 404:
         print('Not found')
-    if response.status_code == 403:
+    elif response.status_code == 403:
         chrono = datetime.fromtimestamp(
             int(response.headers['X-RateLimit-Reset'])).minute
         now = datetime.now().minute
-        print("Reset in {} min".format(chrono-now))
+        print("Reset in {} min".format(chrono - now))

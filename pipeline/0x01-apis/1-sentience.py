@@ -13,8 +13,8 @@ def sentientPlanets():
     while response['next']:
         for species in response['results']:
                     if species['homeworld']:
-                        planet = requests.get(species['homeworld']).json()
-                        planets.append(planet['name'])
+                        planet = requests.get(species['homeworld']).json()['name']
+                        planets.append(planet)
         SWAPI_url = response['next']
         response = requests.get(SWAPI_url).json()
     return planets
