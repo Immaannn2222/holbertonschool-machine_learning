@@ -16,5 +16,6 @@ def sentientPlanets():
                 planet_name = requests.get(
                     sentinent['homeworld']).json()['name']
                 planets.append(planet_name)
-        requests.get(response['next']).json()
+        SWAPI_url = response['next']
+        response = requests.get(SWAPI_url).json()
     return planets
