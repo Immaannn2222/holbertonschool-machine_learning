@@ -15,7 +15,7 @@ if __name__ == '__main__':
     elif response.status_code == 404:
         print('Not found')
     elif response.status_code == 403:
-        chrono = datetime.fromtimestamp(
-            int(response.headers['X-RateLimit-Reset'])).minute
-        now = datetime.now().minute
-        print("Reset in {} min".format(chrono - now))
+        header = response.headers['X-Ratelimit-Reset']
+        now = datetime.now().timestamp()
+        time = (int(header) - int(now)) / 60
+        print("Reset in {} min".format(time))
