@@ -10,10 +10,10 @@ if __name__ == "__main__":
     doc_count = logs_collection.count_documents({})
 
     method = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    search = {"method": "GET", "path": "/status"}
+    x = {"method": "GET", "path": "/status"}
     print('{} logs'.format(doc_count))
     print('Methods:')
     for i in method:
         count_method = logs_collection.count_documents({"method": i})
         print('\tmethod {}: {}'.format(i, count_method))
-    print("{} status check".format(logs_collection.count_documents(search)))
+    print("{} status check".format(logs_collection.count_documents(x)))
